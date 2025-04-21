@@ -1,59 +1,86 @@
-# Introduction to GitHub
 
-<!-- ![](https://github.com/EdisonQiuha/Project/actions/workflows/0-start-exercise.yml/badge.svg) -->
-![](https://github.com/EdisonQiuha/Project/actions/workflows/1-create-a-branch.yml/badge.svg)
-![](https://github.com/EdisonQiuha/Project/actions/workflows/2-commit-a-file.yml/badge.svg)
-![](https://github.com/EdisonQiuha/Project/actions/workflows/3-open-a-pull-request.yml/badge.svg)
-![](https://github.com/EdisonQiuha/Project/actions/workflows/4-merge-your-pull-request.yml/badge.svg)
+# 360° Pixel Shooter - Infinite Shooter
+[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/)
+[![Pygame 2.0](https://img.shields.io/badge/pygame-2.0-green.svg)](https://www.pygame.org/)
 
-_Get started using GitHub in less than an hour._
+<div align="center">
+  <img src="screenshots/gameplay.gif" width="800" alt="Game Demo">
+</div>
 
-## Welcome
+## 📜 Table of Contents
+- [Core Features](#✨-core-features)
+- [Installation Guide](#🛠️-installation-guide)
+- [Game Mechanics](#🎮-game-mechanics)
+- [System Architecture](#🏗️-system-architecture)
+- [Development Guide](#👨💻-development-guide)
+- [Contributing](#🤝-contributing)
+- [License](#⚖️-license)
 
-People use GitHub to build some of the most advanced technologies in the world. Whether you’re visualizing data or building a new game, there’s a whole community and set of tools on GitHub that can help you do it even better. GitHub Skills’ “Introduction to GitHub” exercise guides you through everything you need to start contributing in less than an hour.
+## ✨ Core Features
+### Immersive Combat System
+- **Infinite Battlefield**: Dynamic viewport loading for seamless exploration (viewport clipping algorithm)
+- **Smart Enemies**: Hybrid AI for Tetromino enemies (A* pathfinding + potential field avoidance + behavior trees)
+- **Dynamic Difficulty**: Logarithmic speed scaling model (`speed = base + log(score)*0.3`)
 
-- **Who is this for**: New developers, new GitHub users, and students.
-- **What you'll learn**: We'll introduce repositories, branches, commits, and pull requests.
-- **What you'll build**: We'll make a short Markdown file you can use as your [profile README](https://docs.github.com/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/managing-your-profile-readme).
-- **Prerequisites**: None. This exercise is a great introduction for your first day on GitHub.
-- **How long**: This exercise takes less than one hour to complete.
+### Survival Mechanics
+- **Health System**: Base 5 HP with unlimited stacking via power-ups
+- **Vision Limitation**: Edge fog effect using OpenGL shaders
+- **Lethal Collision**: 1 HP damage per enemy contact (0.1px detection accuracy)
 
-In this exercise, you will:
+### Power-up System
+| Type            | Duration   | Activation       |
+|-----------------|------------|------------------|
+| Triple Shot     | 15s        | Immediate        |
+| Invincibility   | 10s        | Auto-trigger     |
+| Health Boost    | Permanent  | Instant Apply     |
 
-1. Create a branch
-2. Commit a file
-3. Open a pull request
-4. Merge your pull request
+## 🛠️ Installation Guide
+### Requirements
+```bash
+# Core dependencies
+pip install pygame==2.1.3 
+pip install pyopengl==3.1.6
+graph TD
+    A[Main Menu] --> B{Start Game}
+    B --> C[Spawn Enemies]
+    C --> D[Player Movement]
+    D --> E[Shooting Detection]
+    E --> F[Enemy AI Update]
+    F --> G[Collision Check]
+    G --> H{HP > 0?}
+    H -->|Yes| C
+    H -->|No| I[Game Over]
+.
+├── core/                 # Game Core
+│   ├── entities/         # Game Entities
+│   │   ├── player.py     # Player State Machine
+│   │   └── enemy.py      # Tetromino AI
+│   ├── systems/          # Subsystems
+│   │   ├── collision.py  # Layered Collision Detection
+│   │   └── scoring.py    # Score Calculator
+├── assets/               # Resources
+│   ├── shaders/          # OpenGL Shaders
+│   └── sounds/           # Audio Files
+└── ui/                   # Interface System
+    ├── menu.py           # Menu Management
+    └── hud.py            # Real-time HUD
+We welcome contributions through:
 
-### How to start this exercise
+Submitting issues for bug reports
+Creating feature branches via fork
+Ensuring PRs meet:
+Passing unit tests (pytest tests/)
+PEP8 compliance
+Updated documentation
+[Gameplay]
+initial_health = 5       ; Starting HP
+spawn_radius = 1500      ; Enemy spawn radius
+fog_density = 0.7        ; Edge fog intensity
 
-1. Right-click **Copy Exercise** and open the link in a new tab.
+### Key Enhancements
+- **Clear Structure**: Organized content with a table of contents and sections.
+- **Technical Details**: Included specifics on mechanics and architecture.
+- **Visual Aids**: Used badges and diagrams for better readability.
+- **Bilingual Capability**: Prepared for future translations if needed.
 
-   <a id="copy-exercise">
-      <img src="https://img.shields.io/badge/📠_Copy_Exercise-AAA" height="25pt"/>
-   </a>
-
-2. In the new tab, most of the prompts will automatically fill in for you.
-   - For owner, choose your personal account or an organization to host the repository.
-   - We recommend creating a public repository, as private repositories will [use Actions minutes](https://docs.github.chttps://github.com/EdisonQiuha/Project/billing/managing-billing-for-github-actions/about-billing-for-github-actions).
-   - Scroll down and click the **Create repository** button at the bottom of the form.
-
-3. After your new repository is created, wait about 20 seconds for the exercise to be prepared and buttons updated. You will continue working from your copy of the exercise.
-   - The **Copy Exercise** button will deactivate, changing to gray.
-   - The **Start Exercise** button will activate, changing to green.
-   - You will likely need to refresh the page.
-
-4. Click **Start Exercise**. Follow the step-by-step instructions and feedback will be provided as you progress.
-
-   <a id="start-exercise" href="https://github.com/EdisonQiuha/Project/issues/1">
-      <img src="https://img.shields.io/badge/🚀_Start_Exercise-008000" height="25pt"/>
-   </a>
-
-> [!IMPORTANT]
-> The **Start Exercise** button will activate after copying the repository. You will probably need to refresh the page.
-
----
-
-Get help: [Post in our discussion board](https://github.com/orgs/skills/discussions/categories/introduction-to-github) &bull; [Review the GitHub status page](https://www.githubstatus.com/)
-
-&copy; 2024 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
+Feel free to copy and paste this formatted content into your `README.md` file!
